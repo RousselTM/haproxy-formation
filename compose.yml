@@ -1,0 +1,20 @@
+services:
+
+  haproxy:
+    image: haproxy:3.4-alpine
+    scale: 3
+    restart: always
+    volumes:
+      - ./config/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    networks:
+      - haproxy_net
+      - nginx_net
+
+networks:
+  haproxy_net:
+    driver: bridge
+    external: true
+  nginx_net:
+    driver: bridge
+    external: true
+
